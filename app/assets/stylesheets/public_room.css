@@ -1,0 +1,10 @@
+div#chat_room{
+	
+	border-width: 5px;
+	border-style: solid;
+	border-color: #98bf21;
+	padding:3px;
+	width: 500px;
+	height: 200px;
+	overflow: scroll;
+}

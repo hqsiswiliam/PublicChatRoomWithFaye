@@ -5,8 +5,11 @@
 
     // Subscribe to the public channel
     var public_subscription = client.subscribe('/messages/public', function(data) {
-      $('<br>').html(data.username + ":    " + data.msg).appendTo('#chat_room');
+
+      $('<p></p>').html(data.username + ":    " + data.msg).appendTo('#chat_room');
+      
     });
+    
  
     // Handle form submissions and post messages to faye
     $('#new_public_message').submit(function(){
@@ -15,12 +18,16 @@
         username: '<%= current_user.email %>',
         msg: $('#message').val()
       });
+
+      //scroll to bottom
+      var $t = $('div#chat_room');
+      $t.animate({"scrollTop": $('div#chat_room')[0].scrollHeight}, "slow");
  
       // Clear the message box
-      $('#message').val('');
+      //$('#message').val('');
  
       // Don't actually submit the form, otherwise the page will refresh.
-      return false;
+      return true;
     });
   });
 </script>
@@ -30,16 +37,15 @@
     <p class="alert"> Welcome to the chat room <%= current_user.email %>! </p>
   
    <% @public_messages.each do |message| %>
-         <%= message.email %>:&nbsp;&nbsp;&nbsp;&nbsp;
-         <%= message.public_message %><br>
+         <p><%= message.email %>:
+         <%= message.public_message %></p>
    <% end %>
 
-
   </div>
-  <%= form_for PublicMessage.new,  remote: true do |f| %>
+  <%= form_for PublicMessage.new,:id=> 'new_public_message',  remote: true do |f| %>
   <br>
   <%=f.hidden_field :email, :value=>current_user.email%><br>
-  Message: <%= f.text_field :public_message ,:class => 'chat_index', :id=>"message" %></p>
+  Message: <%= f.text_field :public_message ,:class => 'chat_index', :id=>'message' %></p>
   <%= f.submit "Send" %>
 <% end %>
  
