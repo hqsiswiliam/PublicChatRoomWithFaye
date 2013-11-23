@@ -1,0 +1,29 @@
+<h1>Listing public_messages</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Email</th>
+      <th>Public message</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @public_messages.each do |public_message| %>
+      <tr>
+        <td><%= public_message.email %></td>
+        <td><%= public_message.public_message %></td>
+        <td><%= link_to 'Show', public_message %></td>
+        <td><%= link_to 'Edit', edit_public_message_path(public_message) %></td>
+        <td><%= link_to 'Destroy', public_message, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Public message', new_public_message_path %>

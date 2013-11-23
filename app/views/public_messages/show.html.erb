@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @public_message.email %>
+</p>
+
+<p>
+  <strong>Public message:</strong>
+  <%= @public_message.public_message %>
+</p>
+
+<%= link_to 'Edit', edit_public_message_path(@public_message) %> |
+<%= link_to 'Back', public_messages_path %>
